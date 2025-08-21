@@ -15,10 +15,10 @@ camera.position.z = 2;
 const cena = new THREE.Scene();
 new OrbitControls(camera, renderer.domElement);
 
+const loader = new THREE.TextureLoader();
 const geometria = new THREE.IcosahedronGeometry(1, 14);
 const mat  = new THREE.MeshStandardMaterial({
-    color: 0xffff00,
-    // flatShading: true
+  map: loader.load('./texturas/00_earthmap1k.jpg'),
 });
 
 const terra = new THREE.Mesh(geometria, mat);

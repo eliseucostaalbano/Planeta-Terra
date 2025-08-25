@@ -32,21 +32,32 @@ cena.add(estrelas);
 const luzMat = new THREE.MeshBasicMaterial({
   map: loader.load('./texturas/03_earthlights1k.jpg'),
   blending: THREE.AdditiveBlending,
-  transparent: true,
-  opacity: 0.5
 });
 
 const luzMesh = new THREE.Mesh(geometria, luzMat);
 terraGrupo.add(luzMesh);
 
+const nuvensMat = new THREE.MeshStandardMaterial({
+  map: loader.load('./texturas/04_earthcloudmap.jpg'),
+  transparent: true,
+  opacity: 0.8,
+  blending: THREE.AdditiveBlending,
+});
+
+const nuvensMesh = new THREE.Mesh(geometria, nuvensMat);
+nuvensMesh.scale.set(1.01, 1.01, 1.01);
+terraGrupo.add(nuvensMesh);
+
 const luzSolar = new THREE.DirectionalLight(0xffffff);
-luzSolar.position.set(-2, 0.5, 1.5);
+luzSolar.position.setScalar(1.003);
 cena.add(luzSolar);
 
 function animate() {
   requestAnimationFrame(animate);
   terraMesh.rotation.y += 0.002;
   luzMesh.rotation.y += 0.002;
+  nuvensMesh.rotation.y += 0.002;
+  // estrelas.rotation.y -= 0.002;
   renderer.render(cena, camera);
 }
 animate();
